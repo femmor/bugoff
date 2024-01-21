@@ -6,7 +6,7 @@ interface LinksProps {
 export const links: LinksProps[] = [
   {
     label: "Dashboard",
-    href: "/dashboard",
+    href: "/",
   },
   {
     label: "Issues",
