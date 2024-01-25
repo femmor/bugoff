@@ -1,31 +1,12 @@
 import { Table } from "@radix-ui/themes";
-import prisma from "@/prisma/client";
-import IssueStatusBadge from "../components/IssueStatusBadge";
-import { Status } from "@prisma/client";
 import IssueActions from "./IssueActions";
 
-export interface Issue {
-  id: number;
-  title: string;
-  description: string;
-  status: string;
-  createdAt: Date;
-}
-
-const IssuesPage = async () => {
-  const issues: Issue[] = await prisma.issue.findMany();
-
-  // Function to simulate a delay
-  function simulateDelay(delay: number) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
-
-  await simulateDelay(5000);
+const LoadingIssuesPage = () => {
+  const issues = [1, 2, 3, 4, 5];
 
   return (
-    <div className="">
+    <>
       <IssueActions />
-
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
@@ -39,26 +20,26 @@ const IssuesPage = async () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {issues?.map((issue: Issue) => (
-            <Table.Row key={issue.id}>
+          {issues.map((issue) => (
+            <Table.Row key={issue}>
               <Table.Cell>
-                {issue.title}
+                <div className="skeleton h-4 w-full"></div>
                 <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status as Status} />
+                  <div className="skeleton h-4 w-full"></div>
                 </div>
               </Table.Cell>
 
               <Table.Cell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status as Status} />
+                <div className="skeleton h-4 w-full"></div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
+                <div className="skeleton h-4 w-full"></div>
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table.Root>
-    </div>
+    </>
   );
 };
-export default IssuesPage;
+export default LoadingIssuesPage;

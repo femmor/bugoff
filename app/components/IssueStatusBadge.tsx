@@ -9,7 +9,7 @@ const statusMap: Record<
   Status,
   {
     label: string;
-    color: "orange" | "blue" | "green";
+    color: "orange" | "purple" | "green";
   }
 > = {
   OPEN: {
@@ -18,7 +18,7 @@ const statusMap: Record<
   },
   IN_PROGRESS: {
     label: "In Progress",
-    color: "blue",
+    color: "purple",
   },
   CLOSED: {
     label: "Closed",
