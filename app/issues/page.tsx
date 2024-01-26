@@ -3,6 +3,8 @@ import prisma from "@/prisma/client";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import { Status } from "@prisma/client";
 import IssueActions from "./IssueActions";
+import Link from "next/link";
+import { simulateDelay } from "../utils/simulateDelay";
 
 export interface Issue {
   id: number;
@@ -15,12 +17,7 @@ export interface Issue {
 const IssuesPage = async () => {
   const issues: Issue[] = await prisma.issue.findMany();
 
-  // Function to simulate a delay
-  function simulateDelay(delay: number) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
-
-  await simulateDelay(5000);
+  await simulateDelay(2000);
 
   return (
     <div className="">
@@ -42,7 +39,7 @@ const IssuesPage = async () => {
           {issues?.map((issue: Issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                {issue.title}
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status as Status} />
                 </div>
