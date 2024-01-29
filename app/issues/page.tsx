@@ -17,7 +17,7 @@ export interface Issue {
 const IssuesPage = async () => {
   const issues: Issue[] = await prisma.issue.findMany();
 
-  await simulateDelay(2000);
+  // await simulateDelay(2000);
 
   return (
     <div className="">
