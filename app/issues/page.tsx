@@ -1,10 +1,8 @@
-import { Table } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "../components/IssueStatusBadge";
 import { Status } from "@prisma/client";
+import { Table } from "@radix-ui/themes";
+import { CustomLink, IssueStatusBadge } from "../components";
 import IssueActions from "./IssueActions";
-import { simulateDelay } from "../utils/simulateDelay";
-import CustomLink from "../components/CustomLink";
 
 export interface Issue {
   id: number;

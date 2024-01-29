@@ -1,6 +1,5 @@
-import { Issue } from "@prisma/client";
 import { Box, Card, Flex } from "@radix-ui/themes";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "../../components";
 
 const LoadingIssueDetailPage = () => {
   return (
