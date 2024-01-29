@@ -3,8 +3,8 @@ import prisma from "@/prisma/client";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import { Status } from "@prisma/client";
 import IssueActions from "./IssueActions";
-import Link from "next/link";
 import { simulateDelay } from "../utils/simulateDelay";
+import CustomLink from "../components/CustomLink";
 
 export interface Issue {
   id: number;
@@ -39,7 +39,9 @@ const IssuesPage = async () => {
           {issues?.map((issue: Issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                <CustomLink href={`/issues/${issue.id}`}>
+                  {issue.title}
+                </CustomLink>
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status as Status} />
                 </div>
