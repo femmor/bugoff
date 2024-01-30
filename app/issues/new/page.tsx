@@ -9,13 +9,14 @@ import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { ComponentType, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+const SimpleMDE: ComponentType<{}> = dynamic(
+  () => import("react-simplemde-editor").then((mod) => mod.default),
+  { ssr: false }
+);
 
 type IssueFormProps = z.infer<typeof createIssueSchema>;
 
@@ -33,8 +34,6 @@ const NewIssuePage = () => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const { Root, Input } = TextField;
-
-  const editorRef = useRef();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -64,7 +63,9 @@ const NewIssuePage = () => {
         <Controller
           name="description"
           control={control}
-          render={({ field }) => <SimpleMDE {...field} id="description" />}
+          render={({ field }) => {
+            return <SimpleMDE key={field.name} id="description" {...field} />;
+          }}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
